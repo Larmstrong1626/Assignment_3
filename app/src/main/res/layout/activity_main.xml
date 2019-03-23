@@ -13,14 +13,14 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/color_picker_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@mipmap/ic_launcher" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/brush_size_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
