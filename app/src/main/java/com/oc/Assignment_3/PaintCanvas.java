@@ -129,7 +129,7 @@ public class PaintCanvas extends View {
         }
 
     }
-//Either draw rectangle, or line 
+//Either draw rectangle, or line
     private void upTouch() {
         my_Path.lineTo(X,Y);
         if(Rectangle) {
@@ -139,7 +139,7 @@ public class PaintCanvas extends View {
         }
         my_Path.reset();
     }
-
+//Touch event for the canvas,
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
