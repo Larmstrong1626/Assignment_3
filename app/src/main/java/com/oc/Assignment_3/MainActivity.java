@@ -9,6 +9,7 @@ package com.oc.Assignment_3;
 
  */
 import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +46,16 @@ public class MainActivity extends Activity {
         brushMenu.add(0,1,0, "Medium");
         brushMenu.add(0,2,0, "Thick");
 
+        /******Shape menu*****/
+        ImageButton shape = findViewById(R.id.shape_btn);
+        final PopupMenu shapePopMenu = new PopupMenu(getApplicationContext(), shape);
+        Menu shapeMenu = shapePopMenu.getMenu();
+
+        shapeMenu.add(0,0,0, "Line");
+        shapeMenu.add(0,1,0, " Unfilled Rectangle");
+        shapeMenu.add(0,2,0, "Filled Rectangle");
+        shapeMenu.add(0,3,0, "Unfilled Oval");
+        shapeMenu.add(0,4,0,"Filled Oval");
 
         /*****On Click Listener for Color Button*****/
         colorPicked.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +70,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v){
                 brushSizePopMenu.show();
+            }
+        });
+
+        /*****On Click Listner for Shape Button*****/
+        shape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                shapePopMenu.show();
             }
         });
 
@@ -95,6 +114,31 @@ public class MainActivity extends Activity {
                         break;
                     case 2:
                         my_canvas.change_brush(2);
+                        break;
+                }
+                return false;
+            }
+        });
+
+        /*****On Click Listener for sub menu of shapes*****/
+        shapePopMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case 0:
+                        my_canvas.setShape(0);
+                        break;
+                    case 1:
+                        my_canvas.setShape(1);
+                        break;
+                    case 2:
+                        my_canvas.setShape(2);
+                        break;
+                    case 3:
+                        my_canvas.setShape(3);
+                        break;
+                    case 4:
+                        my_canvas.setShape(4);
                         break;
                 }
                 return false;

@@ -17,6 +17,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -29,6 +30,7 @@ public class PaintCanvas extends View {
 
     private Path my_Path;
     boolean Rectangle = false;
+    int shape =0;
 
     private float endX, endY;
     private float X, Y;
@@ -70,7 +72,7 @@ public class PaintCanvas extends View {
 
 
         public void change_brush(int new_brush){
-            invalidate();
+            //invalidate();
             int newBrush = new_brush;
             if(newBrush == 0){
                 paintBrush.setStrokeWidth(8f);
@@ -97,6 +99,10 @@ public class PaintCanvas extends View {
         my_color = Color.parseColor(new_color);
         paintBrush.setColor(my_color);
 
+    }
+//sets the shape based on either line or rectangle options.
+    public void setShape(int myShape){
+            shape = myShape;
     }
 
     @Override
@@ -126,10 +132,10 @@ public class PaintCanvas extends View {
         float dy = Math.abs(y - Y);
 
         if(dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            if(Rectangle) {
+            if(shape != 0) {
                 endX = x;
                 endY = y;
-            } else {
+            }else {
                 my_Path.quadTo(X, Y, (x + X) / 2, (y + Y) / 2);
                 X = x;
                 Y = y;
@@ -137,15 +143,27 @@ public class PaintCanvas extends View {
         }
 
     }
+
 //Either draw rectangle, or line
-    private void upTouch() {
+    public void upTouch(int thisShape) {
+        shape = thisShape;
         my_Path.lineTo(X,Y);
-        if(Rectangle) {
+        if(shape == 0){
+           my_canvas.drawPath(my_Path, paintBrush);
+        }else if(shape == 1) {
             my_canvas.drawRect(X,Y,endX,endY,paintBrush);
-        } else {
+        } else if(shape == 2) {
+            paintBrush.setStyle(Paint.Style.FILL);
+            my_canvas.drawRect(X,Y,endX,endY,paintBrush);
+        }else if(shape == 3){
+            my_canvas.drawOval(X,Y,endX,endY, paintBrush);
+        }else if(shape == 4){
+            paintBrush.setStyle(Paint.Style.FILL);
+            my_canvas.drawOval(X,Y,endX,endY, paintBrush);
+        }else{
             my_canvas.drawPath(my_Path, paintBrush);
         }
-        my_Path.reset();
+       my_Path.reset();
     }
 //Touch event for the canvas,
     @Override
@@ -160,12 +178,14 @@ public class PaintCanvas extends View {
             moveTouch(x, y);
             invalidate();
         }else if(event.getAction()==MotionEvent.ACTION_UP){
-            upTouch();
+            upTouch(shape);
             invalidate();
         }
         return true;
 
 
     }
+
+
 
 }
