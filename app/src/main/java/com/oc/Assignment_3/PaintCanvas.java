@@ -129,7 +129,7 @@ public class PaintCanvas extends View {
         }
 
     }
-
+//Either draw rectangle, or line 
     private void upTouch() {
         my_Path.lineTo(X,Y);
         if(Rectangle) {
