@@ -1,0 +1,104 @@
+Index: app/src/main/java/com/oc/Assignment_3/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/oc/Assignment_3/MainActivity.java	(revision 9206e8c760351716b656a2ff7a19db297c500b8c)
++++ app/src/main/java/com/oc/Assignment_3/MainActivity.java	(date 1553355144372)
+@@ -10,6 +10,11 @@
+  */
+ import android.app.Activity;
+ import android.os.Bundle;
++import android.view.Menu;
++import android.view.MenuItem;
++import android.view.View;
++import android.widget.ImageButton;
++import android.widget.PopupMenu;
+ 
+ public class MainActivity extends Activity {
+ 
+@@ -20,5 +25,40 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+         my_canvas = (PaintCanvas) findViewById(R.id.my_canvas);
++
++        /*****Color Picker Menu*****/
++        ImageButton colorPicked = findViewById(R.id.color_picker_btn);
++        final PopupMenu colorPopMenu = new PopupMenu(getApplicationContext(), colorPicked);
++        Menu colorMenu = colorPopMenu.getMenu();
++
++        colorMenu.add(0,0,0, "Red  ");
++        colorMenu.add(0,1,0, "Blue");
++
++        /*****Brush Size Menu*****/
++
++        ImageButton brushSize = findViewById(R.id.brush_size_btn);
++        final PopupMenu brushSizePopMenu = new PopupMenu(getApplicationContext(), brushSize);
++        Menu brushMenu = brushSizePopMenu.getMenu();
++
++        brushMenu.add(0,0,0, "thin");
++        brushMenu.add(0,0,0, "meduim");
++        brushMenu.add(0,0,0, "thick");
++
++
++        /*****On Click Listener for Color Button*****/
++        colorPicked.setOnClickListener(new View.OnClickListener() {
++            @Override
++            public void onClick(View v) {
++                colorPopMenu.show();
++            }
++        });
++
++        /*****On Click Listener for Brush Size Button******/
++        brushSize.setOnClickListener(new View.OnClickListener(){
++            @Override
++            public void onClick(View v){
++                brushSizePopMenu.show();
++            }
++        });
+     }
+ }
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision 9206e8c760351716b656a2ff7a19db297c500b8c)
++++ app/src/main/res/layout/activity_main.xml	(date 1553355144303)
+@@ -13,14 +13,14 @@
+         android:orientation="horizontal">
+ 
+         <ImageButton
+-            android:id="@+id/imageButton"
++            android:id="@+id/color_picker_btn"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:src="@mipmap/ic_launcher" />
+ 
+         <ImageButton
+-            android:id="@+id/imageButton6"
++            android:id="@+id/brush_size_btn"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 9206e8c760351716b656a2ff7a19db297c500b8c)
++++ app/build.gradle	(date 1553353461355)
+@@ -16,10 +16,11 @@
+             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+         }
+     }
++    buildToolsVersion '28.0.3'
+ }
+ 
+ dependencies {
+-    implementation fileTree(dir: 'libs', include: ['*.jar'])
++    implementation fileTree(include: ['*.jar'], dir: 'libs')
+     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+     testImplementation 'junit:junit:4.12'
+     androidTestImplementation 'com.android.support.test:runner:1.0.2'
