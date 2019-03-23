@@ -1,5 +1,13 @@
 package com.oc.Assignment_3;
 
+/*
+    Robert Armstrong
+    Justin Duff
+    CSCI 4020
+    Assignment 03
+    MainActivity.java
+
+ */
 import android.app.Activity;
 import android.os.Bundle;
 
