@@ -32,7 +32,7 @@ public class PaintCanvas extends View {
 
     private float endX, endY;
     private float X, Y;
-    private int my_color = Color.BLACK;
+    private int my_color = Color.BLACK;//set color to black to start
     private static final float TOUCH_TOLERANCE = 5;
     Context context;
 
@@ -66,7 +66,7 @@ public class PaintCanvas extends View {
 
 
     }
-
+//changes line thickness when brush thickness button is clicked
     public void change_brush() {
         invalidate();
         if(paintBrush.getStrokeWidth() == 8f) {
@@ -77,13 +77,13 @@ public class PaintCanvas extends View {
             paintBrush.setStrokeWidth(8f);
         }
     }
-
+//gives a blank canvas to start new drawing
     public void fresh_canvas() {
 
         my_canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
-
+//sets the color based on color button clicked
     public void setColor(String new_color) {
         invalidate();
         my_color = Color.parseColor(new_color);
@@ -106,7 +106,7 @@ public class PaintCanvas extends View {
         canvas.drawBitmap(my_Bitmap, 0, 0, null);
         canvas.drawPath(my_Path, paintBrush);
     }
-
+//set the starting coordinates
     private void touchstart(float x, float y) {
         my_Path.moveTo(x,y);
         X = x;
