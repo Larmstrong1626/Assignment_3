@@ -17,6 +17,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -79,7 +80,7 @@ public class PaintCanvas extends View {
     }*/
 
         public void change_brush(int new_brush){
-            invalidate();
+            //invalidate();
             int newBrush = new_brush;
             if(newBrush == 0){
                 paintBrush.setStrokeWidth(8f);
@@ -106,6 +107,10 @@ public class PaintCanvas extends View {
         my_color = Color.parseColor(new_color);
         paintBrush.setColor(my_color);
 
+    }
+
+    public void setShape(boolean myRec){
+            Rectangle = myRec;
     }
 
     @Override
@@ -146,15 +151,17 @@ public class PaintCanvas extends View {
         }
 
     }
+
 //Either draw rectangle, or line
-    private void upTouch() {
+    public void upTouch(boolean rec) {
+        Rectangle = rec;
         my_Path.lineTo(X,Y);
         if(Rectangle) {
             my_canvas.drawRect(X,Y,endX,endY,paintBrush);
         } else {
             my_canvas.drawPath(my_Path, paintBrush);
         }
-        my_Path.reset();
+       my_Path.reset();
     }
 //Touch event for the canvas,
     @Override
@@ -169,12 +176,14 @@ public class PaintCanvas extends View {
             moveTouch(x, y);
             invalidate();
         }else if(event.getAction()==MotionEvent.ACTION_UP){
-            upTouch();
+            upTouch(Rectangle);
             invalidate();
         }
         return true;
 
 
     }
+
+
 
 }
