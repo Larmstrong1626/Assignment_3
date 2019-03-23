@@ -67,7 +67,7 @@ public class PaintCanvas extends View {
 
     }
 //changes line thickness when brush thickness button is clicked
-    public void change_brush() {
+ /*   public void change_brush() {
         invalidate();
         if(paintBrush.getStrokeWidth() == 8f) {
             paintBrush.setStrokeWidth(16f);
@@ -76,7 +76,24 @@ public class PaintCanvas extends View {
         } else if(paintBrush.getStrokeWidth() == 32f) {
             paintBrush.setStrokeWidth(8f);
         }
-    }
+    }*/
+
+        public void change_brush(int new_brush){
+            invalidate();
+            int newBrush = new_brush;
+            if(newBrush == 0){
+                paintBrush.setStrokeWidth(8f);
+            }else if(newBrush == 1){
+                paintBrush.setStrokeWidth(16f);
+            }else if(newBrush == 2){
+                paintBrush.setStrokeWidth(32f);
+            }else{
+                paintBrush.setStrokeWidth(8f);
+            }
+
+        }
+
+
 //gives a blank canvas to start new drawing
     public void fresh_canvas() {
 

@@ -31,8 +31,9 @@ public class MainActivity extends Activity {
         final PopupMenu colorPopMenu = new PopupMenu(getApplicationContext(), colorPicked);
         Menu colorMenu = colorPopMenu.getMenu();
 
-        colorMenu.add(0,0,0, "Red  ");
-        colorMenu.add(0,1,0, "Blue");
+        colorMenu.add(0,0,0, "Black");
+        colorMenu.add(0,1,0, "Red");
+        colorMenu.add(0,2,0, "Blue");
 
         /*****Brush Size Menu*****/
 
@@ -40,9 +41,9 @@ public class MainActivity extends Activity {
         final PopupMenu brushSizePopMenu = new PopupMenu(getApplicationContext(), brushSize);
         Menu brushMenu = brushSizePopMenu.getMenu();
 
-        brushMenu.add(0,0,0, "thin");
-        brushMenu.add(0,0,0, "meduim");
-        brushMenu.add(0,0,0, "thick");
+        brushMenu.add(0,0,0, "Thin");
+        brushMenu.add(0,1,0, "Medium");
+        brushMenu.add(0,2,0, "Thick");
 
 
         /*****On Click Listener for Color Button*****/
@@ -58,6 +59,45 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v){
                 brushSizePopMenu.show();
+            }
+        });
+
+        /*****On Click Listener for sub menu of Colors*****/
+        colorPopMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()){
+                    case 0:
+                        my_canvas.setColor("Black");
+                        break;
+                    case 1:
+                        my_canvas.setColor("Red");
+                        break;
+                    case 2:
+                        my_canvas.setColor("Blue");
+                        break;
+
+                }
+                return false;
+            }
+        });
+
+        /****On Click Listener for sub menu of Brush sizes.*****/
+        brushSizePopMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch(item.getItemId()) {
+                    case 0:
+                        my_canvas.change_brush(0);
+                        break;
+                    case 1:
+                        my_canvas.change_brush(1);
+                        break;
+                    case 2:
+                        my_canvas.change_brush(2);
+                        break;
+                }
+                return false;
             }
         });
     }
