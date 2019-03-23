@@ -10,8 +10,11 @@ package com.oc.Assignment_3;
  */
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.View;
@@ -21,35 +24,85 @@ public class PaintCanvas extends View {
     private Paint paintBrush;
     public Canvas my_canvas;
 
+    private Bitmap my_Bitmap;
+
+    private Path my_Path;
+
+    private float endX, endY;
+    private float X, Y;
+    private int my_color = Color.BLACK;
+    private static final float TOUCH_TOLERANCE = 5;
+    Context context;
 
 
-
-    public PaintCanvas(Context context){
+    public PaintCanvas(Context context) {
         super(context);
-        setup(null);
+        setup();
     }
 
 
-    public PaintCanvas(Context context, AttributeSet attrs){
+    public PaintCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setup(attrs);
+        setup();
     }
 
-    public PaintCanvas(Context context, AttributeSet attrs, int defStyleAttr){
+    public PaintCanvas(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setup(attrs);
+        setup();
     }
 
-    public void setup(AttributeSet attrs){
+    public void setup() {
 
+
+        my_Path = new Path();
+        paintBrush = new Paint();
+        paintBrush.setAntiAlias(true);
+        paintBrush.setColor(my_color);
+        paintBrush.setStyle(Paint.Style.STROKE);
+        paintBrush.setStrokeJoin(Paint.Join.ROUND);
+        paintBrush.setStrokeWidth(8f);
 
 
     }
 
-    public void fresh_canvas(){
+    public void change_brush() {
+        invalidate();
+        if(paintBrush.getStrokeWidth() == 8f) {
+            paintBrush.setStrokeWidth(16f);
+        } else if(paintBrush.getStrokeWidth() == 16f) {
+            paintBrush.setStrokeWidth(32f);
+        } else if(paintBrush.getStrokeWidth() == 32f) {
+            paintBrush.setStrokeWidth(8f);
+        }
+    }
+
+    public void fresh_canvas() {
 
         my_canvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public void setColor(String new_color) {
+        invalidate();
+        my_color = Color.parseColor(new_color);
+        paintBrush.setColor(my_color);
+
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int old_width, int old_height) {
+        super.onSizeChanged(w, h, old_width, old_height);
+
+        my_Bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        my_canvas = new Canvas(my_Bitmap);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        canvas.drawBitmap(my_Bitmap, 0, 0, null);
+        canvas.drawPath(my_Path, paintBrush);
     }
 
 }
