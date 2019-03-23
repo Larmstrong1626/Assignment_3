@@ -52,7 +52,10 @@ public class MainActivity extends Activity {
         Menu shapeMenu = shapePopMenu.getMenu();
 
         shapeMenu.add(0,0,0, "Line");
-        shapeMenu.add(0,1,0, "Rectangle");
+        shapeMenu.add(0,1,0, " Unfilled Rectangle");
+        shapeMenu.add(0,2,0, "Filled Rectangle");
+        shapeMenu.add(0,3,0, "Unfilled Oval");
+        shapeMenu.add(0,4,0,"Filled Oval");
 
         /*****On Click Listener for Color Button*****/
         colorPicked.setOnClickListener(new View.OnClickListener() {
@@ -123,12 +126,20 @@ public class MainActivity extends Activity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch(item.getItemId()){
                     case 0:
-                        my_canvas.setShape(false);
+                        my_canvas.setShape(0);
                         break;
                     case 1:
-                        my_canvas.setShape(true);
+                        my_canvas.setShape(1);
                         break;
-
+                    case 2:
+                        my_canvas.setShape(2);
+                        break;
+                    case 3:
+                        my_canvas.setShape(3);
+                        break;
+                    case 4:
+                        my_canvas.setShape(4);
+                        break;
                 }
                 return false;
             }
