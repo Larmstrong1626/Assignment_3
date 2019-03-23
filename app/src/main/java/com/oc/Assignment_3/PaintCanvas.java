@@ -17,6 +17,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class PaintCanvas extends View {
@@ -27,6 +28,7 @@ public class PaintCanvas extends View {
     private Bitmap my_Bitmap;
 
     private Path my_Path;
+    boolean Rectangle = false;
 
     private float endX, endY;
     private float X, Y;
@@ -103,6 +105,59 @@ public class PaintCanvas extends View {
 
         canvas.drawBitmap(my_Bitmap, 0, 0, null);
         canvas.drawPath(my_Path, paintBrush);
+    }
+
+    private void touchstart(float x, float y) {
+        my_Path.moveTo(x,y);
+        X = x;
+        Y = y;
+    }
+
+    private void moveTouch(float x, float y) {
+        float dx = Math.abs(x - X);
+        float dy = Math.abs(y - Y);
+
+        if(dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            if(Rectangle) {
+                endX = x;
+                endY = y;
+            } else {
+                my_Path.quadTo(X, Y, (x + X) / 2, (y + Y) / 2);
+                X = x;
+                Y = y;
+            }
+        }
+
+    }
+
+    private void upTouch() {
+        my_Path.lineTo(X,Y);
+        if(Rectangle) {
+            my_canvas.drawRect(X,Y,endX,endY,paintBrush);
+        } else {
+            my_canvas.drawPath(my_Path, paintBrush);
+        }
+        my_Path.reset();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            touchstart(x, y);
+            invalidate();
+        }else if(event.getAction()==MotionEvent.ACTION_MOVE){
+            moveTouch(x, y);
+            invalidate();
+        }else if(event.getAction()==MotionEvent.ACTION_UP){
+            upTouch();
+            invalidate();
+        }
+        return true;
+
+
     }
 
 }

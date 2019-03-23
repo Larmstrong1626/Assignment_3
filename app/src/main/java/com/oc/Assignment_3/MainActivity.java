@@ -19,5 +19,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        my_canvas = (PaintCanvas) findViewById(R.id.my_canvas);
     }
 }
