@@ -149,18 +149,24 @@ public class PaintCanvas extends View {
         shape = thisShape;
         my_Path.lineTo(X,Y);
         if(shape == 0){
+            paintBrush.setStyle(Paint.Style.STROKE);
            my_canvas.drawPath(my_Path, paintBrush);
         }else if(shape == 1) {
+            paintBrush.setStyle(Paint.Style.STROKE);
             my_canvas.drawRect(X,Y,endX,endY,paintBrush);
         } else if(shape == 2) {
             paintBrush.setStyle(Paint.Style.FILL);
             my_canvas.drawRect(X,Y,endX,endY,paintBrush);
+            paintBrush.setStyle(Paint.Style.STROKE);
         }else if(shape == 3){
+            paintBrush.setStyle(Paint.Style.STROKE);
             my_canvas.drawOval(X,Y,endX,endY, paintBrush);
         }else if(shape == 4){
             paintBrush.setStyle(Paint.Style.FILL);
             my_canvas.drawOval(X,Y,endX,endY, paintBrush);
+            paintBrush.setStyle(Paint.Style.STROKE);
         }else{
+            paintBrush.setStyle(Paint.Style.STROKE);
             my_canvas.drawPath(my_Path, paintBrush);
         }
        my_Path.reset();
