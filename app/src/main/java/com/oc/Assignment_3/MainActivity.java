@@ -80,6 +80,15 @@ public class MainActivity extends Activity {
             }
         });
 
+        /*****On Click Listener for Save Button******/
+        ImageButton save_btn=findViewById(R.id.save_btn);
+        save_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                saveImage();
+            }
+        });
+
 
         /*****On Click Listener for Brush Size Button******/
         brushSize.setOnClickListener(new View.OnClickListener(){
@@ -188,6 +197,18 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Couldn't open image.",Toast.LENGTH_LONG).show();
 
             }
+        }
+    }
+
+    public void saveImage() {
+        try {
+            my_canvas.setDrawingCacheEnabled(true);
+            Bitmap b = my_canvas.getDrawingCache();
+
+            MediaStore.Images.Media.insertImage(this.getContentResolver(), b, "Drawing", "Random Drawing");
+            Toast.makeText(this, "Image Saved Successfully", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.i("-------Issue with Save", e.toString());
         }
     }
 }
