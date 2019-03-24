@@ -204,11 +204,10 @@ public class MainActivity extends Activity {
         try {
             my_canvas.setDrawingCacheEnabled(true);
             Bitmap b = my_canvas.getDrawingCache();
-            MediaStore.Images.Media.insertImage(this.getContentResolver(), b, "Drawing", "Random Drawing");
-            //MediaStore.Images.Media.insertImage(getContentResolver(), "yourBitmap", "yourTitle" , "yourDescription");
-            Toast.makeText(this, "Image Saved To Gallery.", Toast.LENGTH_LONG).show();
+            MediaStore.Images.Media.insertImage(this.getContentResolver(), b, "Drawing", "My Drawing");
+             Toast.makeText(this, "Image Saved!", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Log.i("EXCEPTION", e.toString());
+            Log.i("Error Saving", e.toString());
         }
     }
 }
