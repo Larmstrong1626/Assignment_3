@@ -15,23 +15,23 @@
         <ImageButton
             android:id="@+id/color_picker_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/black" />
 
         <ImageButton
             android:id="@+id/brush_size_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/smallbrush" />
 
         <ImageButton
             android:id="@+id/shape_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/line" />
 
         <ImageButton
             android:id="@+id/fill_btn"

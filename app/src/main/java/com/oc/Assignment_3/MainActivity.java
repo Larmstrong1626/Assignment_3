@@ -9,9 +9,9 @@ package com.oc.Assignment_3;
 
  */
 import android.app.Activity;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,9 +28,9 @@ public class MainActivity extends Activity {
         my_canvas = (PaintCanvas) findViewById(R.id.my_canvas);
 
         /*****Color Picker Menu*****/
-        ImageButton colorPicked = findViewById(R.id.color_picker_btn);
+        final ImageButton colorPicked = findViewById(R.id.color_picker_btn);
         final PopupMenu colorPopMenu = new PopupMenu(getApplicationContext(), colorPicked);
-        Menu colorMenu = colorPopMenu.getMenu();
+        final Menu colorMenu = colorPopMenu.getMenu();
 
         colorMenu.add(0,0,0, "Black");
         colorMenu.add(0,1,0, "Red");
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
         /*****Brush Size Menu*****/
 
-        ImageButton brushSize = findViewById(R.id.brush_size_btn);
+        final ImageButton brushSize = findViewById(R.id.brush_size_btn);
         final PopupMenu brushSizePopMenu = new PopupMenu(getApplicationContext(), brushSize);
         Menu brushMenu = brushSizePopMenu.getMenu();
 
@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
         brushMenu.add(0,2,0, "Thick");
 
         /******Shape menu*****/
-        ImageButton shape = findViewById(R.id.shape_btn);
+        final ImageButton shape = findViewById(R.id.shape_btn);
         final PopupMenu shapePopMenu = new PopupMenu(getApplicationContext(), shape);
         Menu shapeMenu = shapePopMenu.getMenu();
 
@@ -88,12 +88,15 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()){
                     case 0:
                         my_canvas.setColor("Black");
+                        colorPicked.setImageResource(R.drawable.black);
                         break;
                     case 1:
                         my_canvas.setColor("Red");
+                        colorPicked.setImageResource(R.drawable.red);
                         break;
                     case 2:
                         my_canvas.setColor("Blue");
+                        colorPicked.setImageResource(R.drawable.blue);
                         break;
 
                 }
@@ -108,12 +111,15 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()) {
                     case 0:
                         my_canvas.change_brush(0);
+                        brushSize.setImageResource(R.drawable.smallbrush);
                         break;
                     case 1:
                         my_canvas.change_brush(1);
+                        brushSize.setImageResource(R.drawable.mediumbrush);
                         break;
                     case 2:
                         my_canvas.change_brush(2);
+                        brushSize.setImageResource(R.drawable.thickbrush);
                         break;
                 }
                 return false;
@@ -127,22 +133,31 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()){
                     case 0:
                         my_canvas.setShape(0);
+                        shape.setImageResource(R.drawable.line);
                         break;
                     case 1:
                         my_canvas.setShape(1);
+                        shape.setImageResource(R.drawable.rectangle);
                         break;
                     case 2:
                         my_canvas.setShape(2);
+                        shape.setImageResource(R.drawable.filledrectangle);
                         break;
                     case 3:
                         my_canvas.setShape(3);
+                        shape.setImageResource(R.drawable.oval);
                         break;
                     case 4:
                         my_canvas.setShape(4);
+                        shape.setImageResource(R.drawable.filledoval);
                         break;
                 }
                 return false;
             }
         });
     }
+
+
+
+
 }
