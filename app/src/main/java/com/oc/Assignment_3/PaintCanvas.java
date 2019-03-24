@@ -23,7 +23,7 @@ import android.view.View;
 
 public class PaintCanvas extends View {
 
-    private Paint paintBrush;
+    public Paint paintBrush;
     public Canvas my_canvas;
 
     private Bitmap my_Bitmap;

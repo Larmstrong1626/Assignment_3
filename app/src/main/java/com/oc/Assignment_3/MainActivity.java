@@ -9,13 +9,19 @@ package com.oc.Assignment_3;
 
  */
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -64,6 +70,16 @@ public class MainActivity extends Activity {
                 colorPopMenu.show();
             }
         });
+
+        /*****On Click Listener for Open Button******/
+        ImageButton open_btn=findViewById(R.id.open_btn);
+        open_btn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                open_picture();
+            }
+        });
+
 
         /*****On Click Listener for Brush Size Button******/
         brushSize.setOnClickListener(new View.OnClickListener(){
@@ -144,5 +160,34 @@ public class MainActivity extends Activity {
                 return false;
             }
         });
+    }
+//Method to open gallery image and display on canvas
+    public void  open_picture()
+    {
+
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(Intent.createChooser(galleryIntent, ""),1);
+    }
+//On Activity result for opening gallery image
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+        {
+            try {
+                Uri returnedUri = data.getData();
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), returnedUri);
+                my_canvas.my_canvas.drawBitmap(bitmap, 0, 0, my_canvas.paintBrush);
+                my_canvas.invalidate();
+                Toast.makeText(getApplicationContext(), "Image opened!", Toast.LENGTH_LONG).show();
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(), "Couldn't open image.",Toast.LENGTH_LONG).show();
+
+            }
+        }
     }
 }

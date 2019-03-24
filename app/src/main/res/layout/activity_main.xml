@@ -41,11 +41,11 @@
             android:src="@mipmap/ic_launcher" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/open_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/folder" />
 
         <ImageButton
             android:id="@+id/imageButton2"
