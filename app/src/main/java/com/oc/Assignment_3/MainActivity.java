@@ -11,6 +11,7 @@ package com.oc.Assignment_3;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -26,15 +28,16 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     private PaintCanvas my_canvas;
-
+    private String color = "Black";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         my_canvas = (PaintCanvas) findViewById(R.id.my_canvas);
 
+
         /*****Color Picker Menu*****/
-        ImageButton colorPicked = findViewById(R.id.color_picker_btn);
+        final ImageButton colorPicked = findViewById(R.id.color_picker_btn);
         final PopupMenu colorPopMenu = new PopupMenu(getApplicationContext(), colorPicked);
         Menu colorMenu = colorPopMenu.getMenu();
 
@@ -44,7 +47,7 @@ public class MainActivity extends Activity {
 
         /*****Brush Size Menu*****/
 
-        ImageButton brushSize = findViewById(R.id.brush_size_btn);
+        final ImageButton brushSize = findViewById(R.id.brush_size_btn);
         final PopupMenu brushSizePopMenu = new PopupMenu(getApplicationContext(), brushSize);
         Menu brushMenu = brushSizePopMenu.getMenu();
 
@@ -53,7 +56,7 @@ public class MainActivity extends Activity {
         brushMenu.add(0,2,0, "Thick");
 
         /******Shape menu*****/
-        ImageButton shape = findViewById(R.id.shape_btn);
+        final ImageButton shape = findViewById(R.id.shape_btn);
         final PopupMenu shapePopMenu = new PopupMenu(getApplicationContext(), shape);
         Menu shapeMenu = shapePopMenu.getMenu();
 
@@ -62,6 +65,9 @@ public class MainActivity extends Activity {
         shapeMenu.add(0,2,0, "Filled Rectangle");
         shapeMenu.add(0,3,0, "Unfilled Oval");
         shapeMenu.add(0,4,0,"Filled Oval");
+
+        //*****FILL BUTTON****//
+        final Button fill = findViewById(R.id.fill_btn);
 
         /*****On Click Listener for Color Button*****/
         colorPicked.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +112,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        /*****ON Click Listener for Fill Button****/
+        fill.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                my_canvas.setBgPaint(color);
+            }
+        });
+
         /*****On Click Listener for sub menu of Colors*****/
         colorPopMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -113,12 +127,21 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()){
                     case 0:
                         my_canvas.setColor("Black");
+                        color = "Black";
+                        colorPicked.setImageResource(R.drawable.black);
+                        fill.setTextColor(Color.BLACK);
                         break;
                     case 1:
                         my_canvas.setColor("Red");
+                        colorPicked.setImageResource(R.drawable.red);
+                        color = "Red";
+                        fill.setTextColor(Color.RED);
                         break;
                     case 2:
                         my_canvas.setColor("Blue");
+                        colorPicked.setImageResource(R.drawable.blue);
+                        color = "Blue";
+                        fill.setTextColor(Color.BLUE);
                         break;
 
                 }
@@ -133,12 +156,15 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()) {
                     case 0:
                         my_canvas.change_brush(0);
+                        brushSize.setImageResource(R.drawable.smallbrush);
                         break;
                     case 1:
                         my_canvas.change_brush(1);
+                        brushSize.setImageResource(R.drawable.mediumbrush);
                         break;
                     case 2:
                         my_canvas.change_brush(2);
+                        brushSize.setImageResource(R.drawable.thickbrush);
                         break;
                 }
                 return false;
@@ -152,18 +178,23 @@ public class MainActivity extends Activity {
                 switch(item.getItemId()){
                     case 0:
                         my_canvas.setShape(0);
+                        shape.setImageResource(R.drawable.line);
                         break;
                     case 1:
                         my_canvas.setShape(1);
+                        shape.setImageResource(R.drawable.rectangle);
                         break;
                     case 2:
                         my_canvas.setShape(2);
+                        shape.setImageResource(R.drawable.filledrectangle);
                         break;
                     case 3:
                         my_canvas.setShape(3);
+                        shape.setImageResource(R.drawable.oval);
                         break;
                     case 4:
                         my_canvas.setShape(4);
+                        shape.setImageResource(R.drawable.filledoval);
                         break;
                 }
                 return false;

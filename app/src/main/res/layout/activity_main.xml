@@ -33,12 +33,18 @@
             android:layout_weight="1"
             android:src="@drawable/line" />
 
-        <ImageButton
+        <Button
             android:id="@+id/fill_btn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:fontFamily="sans-serif"
+            android:text="FILL"
+            android:textAlignment="center"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
 
         <ImageButton
             android:id="@+id/open_btn"

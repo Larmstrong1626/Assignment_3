@@ -24,6 +24,7 @@ import android.view.View;
 public class PaintCanvas extends View {
 
     public Paint paintBrush;
+    public Paint backgroundPaint;
     public Canvas my_canvas;
 
     private Bitmap my_Bitmap;
@@ -65,6 +66,9 @@ public class PaintCanvas extends View {
         paintBrush.setStyle(Paint.Style.STROKE);
         paintBrush.setStrokeJoin(Paint.Join.ROUND);
         paintBrush.setStrokeWidth(8f);
+        backgroundPaint = new Paint();
+        backgroundPaint.setColor(my_color);
+        backgroundPaint.setStyle(Paint.Style.FILL);
 
 
     }
@@ -99,6 +103,13 @@ public class PaintCanvas extends View {
         my_color = Color.parseColor(new_color);
         paintBrush.setColor(my_color);
 
+    }
+
+    public void setBgPaint(String color){
+        invalidate();
+        int new_color = Color.parseColor(color);
+        backgroundPaint.setColor(new_color);
+        my_canvas.drawPaint(backgroundPaint);
     }
 //sets the shape based on either line or rectangle options.
     public void setShape(int myShape){
