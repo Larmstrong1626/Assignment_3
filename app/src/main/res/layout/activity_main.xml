@@ -77,12 +77,14 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton8"
+        <Button
+            android:id="@+id/clr_canvas_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@mipmap/ic_launcher" />
+            android:text="Clear Canvas"
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

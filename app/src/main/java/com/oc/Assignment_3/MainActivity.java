@@ -69,6 +69,9 @@ public class MainActivity extends Activity {
         //*****FILL BUTTON****//
         final Button fill = findViewById(R.id.fill_btn);
 
+        //*****Clear Canvas Button*****//
+        final Button clear = findViewById(R.id.clr_canvas_btn);
+
         /*****On Click Listener for Color Button*****/
         colorPicked.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +120,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v){
                 my_canvas.setBgPaint(color);
+            }
+        });
+
+        /*****On Click Listener for Clear Button*****/
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                my_canvas.fresh_canvas();
             }
         });
 
