@@ -98,6 +98,10 @@ public class MainActivity extends Activity {
             }
         });
 
+        /*****Rotate Button******/
+        ImageButton rotate_btn=findViewById(R.id.rotateButton);
+
+
 
         /*****On Click Listener for Brush Size Button******/
         brushSize.setOnClickListener(new View.OnClickListener(){
@@ -241,7 +245,7 @@ public class MainActivity extends Activity {
             }
         }
     }
-
+//Save the drawing
     public void saveImage() {
         try {
             my_canvas.setDrawingCacheEnabled(true);
@@ -250,6 +254,15 @@ public class MainActivity extends Activity {
              Toast.makeText(this, "Image Saved!", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.i("Error Saving", e.toString());
+        }
+    }
+    //Handle rotations
+    public void rotate(View v) {
+        if(my_canvas.getRotation() < 360f) {
+            my_canvas.setRotation(my_canvas.getRotation() + 90f);
+            if(my_canvas.getRotation() == 360f) {
+                my_canvas.setRotation(0f);
+            }
         }
     }
 }
